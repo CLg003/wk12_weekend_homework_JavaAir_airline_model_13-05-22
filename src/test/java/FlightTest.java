@@ -16,6 +16,12 @@ public class FlightTest {
     CabinCrew cabinCrew3;
     ArrayList<CabinCrew> cabinCrewMembers;
     Plane plane;
+    Passenger passenger1;
+    Passenger passenger2;
+    Passenger passenger3;
+    Passenger passenger4;
+    Passenger passenger5;
+    Passenger passenger6;
 
     @Before
     public void before(){
@@ -27,6 +33,12 @@ public class FlightTest {
         cabinCrewMembers = new ArrayList<>(Arrays.asList(cabinCrew1, cabinCrew2, cabinCrew3));
         plane = new Plane(PlaneType.CONCORDE);
         flight = new Flight(pilot1, pilot2, cabinCrewMembers, plane, "CON1132", "JFK", "EDI", "11:05");
+        passenger1 = new Passenger("Gordon", 0);
+        passenger2 = new Passenger("Ethan", 3);
+        passenger3 = new Passenger("David", 1);
+        passenger4 = new Passenger("Jim", 0);
+        passenger5 = new Passenger("Fraser", 1);
+        passenger6 = new Passenger("Andrew", 1);
     }
 
     @Test
@@ -80,29 +92,45 @@ public class FlightTest {
     }
 
     @Test
-    public void flightCanReturnNumberOfAvailableSeatsWhenEmpty(){
+    public void canReturnNumberOfAvailableSeatsWhenEmpty(){
         assertEquals(5, flight.numberOfAvailableSeats());
     }
 
-//    @Test
-//    public void flightCanBookPassengersIfAvailableSeats(){
-//
-//    }
-//
-//    @Test
-//    public void flightCannotBookPassengersIfNoSeats(){
-//
-//    }
+    @Test
+    public void canBookPassengerIfAvailableSeats(){
+        flight.bookPassenger(passenger1);
+        assertEquals(1, flight.numberOfBookedPassengers());
+        assertEquals(4, flight.numberOfAvailableSeats());
+    }
 
-//    @Test
-//    public void flightCanReturnNumberOfAvailableSeatsWhenPartFull(){
-//        assertEquals(3, flight.getNumberOfAvailableSeats());
-//    }
-//
-//    @Test
-//    public void flightCanReturnNumberOfAvailableSeatsWhenCompletelyFull(){
-//        assertEquals(0, flight.getNumberOfAvailableSeats());
-//    }
+    @Test
+    public void cannotBookPassengerIfNoSeats(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
+        flight.bookPassenger(passenger5);
+        flight.bookPassenger(passenger6);
+        assertEquals(5, flight.numberOfBookedPassengers());
+        assertEquals(0, flight.numberOfAvailableSeats());
+    }
+
+    @Test
+    public void canReturnNumberOfAvailableSeatsWhenPartFull(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        assertEquals(3, flight.numberOfAvailableSeats());
+    }
+
+    @Test
+    public void canReturnNumberOfAvailableSeatsWhenCompletelyFull(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
+        flight.bookPassenger(passenger5);
+        assertEquals(0, flight.numberOfAvailableSeats());
+    }
 
 
 }

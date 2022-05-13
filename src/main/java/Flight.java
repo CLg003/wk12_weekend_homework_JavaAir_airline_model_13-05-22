@@ -78,4 +78,10 @@ public class Flight {
     public int numberOfAvailableSeats(){
         return capacity() - numberOfBookedPassengers();
     }
+
+    public void bookPassenger(Passenger passenger){
+        if (numberOfAvailableSeats() > 0) {
+            bookedPassengers.add(passenger);
+        }
+    }
 }
