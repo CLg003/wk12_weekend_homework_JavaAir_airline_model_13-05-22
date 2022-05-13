@@ -27,4 +27,5 @@ public class PlaneTest {
         assertEquals(352, plane.getTotalWeight());
     }
 
+
 }
