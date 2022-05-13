@@ -13,6 +13,16 @@ public class CabinCrewTest {
     }
 
     @Test
+    public void cabinCrewHasName(){
+        assertEquals("Joey", cabinCrew.getName());
+    }
+
+    @Test
+    public void cabinCrewHasRank(){
+        assertEquals(FlightCrewRank.FLIGHT_ATTENDANT, cabinCrew.getRank());
+    }
+
+    @Test
     public void flightAttendantCanRelayMessagesToPassengers(){
         String messageRelayed = cabinCrew.relayMessageToPassengers("Please return your seats to the upright position for landing.");
         assertEquals("Please return your seats to the upright position for landing.", messageRelayed);
