@@ -68,11 +68,23 @@ public class Flight {
     }
 
     public int capacity(){
-        return getPlane().getCapacity();
+        return plane.getCapacity();
+    }
+
+    public int totalWeightAvailable(){
+        return plane.getTotalWeight();
     }
 
     public int numberOfBookedPassengers(){
-        return getBookedPassengers().size();
+        return bookedPassengers.size();
+    }
+
+    public int numberOfBagsBooked(){
+        int totalBags = 0;
+        for (Passenger passenger : bookedPassengers) {
+            totalBags += passenger.getNumberOfBags();
+        }
+        return totalBags;
     }
 
     public int numberOfAvailableSeats(){

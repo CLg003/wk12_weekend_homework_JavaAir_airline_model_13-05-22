@@ -22,6 +22,7 @@ public class FlightTest {
     Passenger passenger4;
     Passenger passenger5;
     Passenger passenger6;
+    FlightManager flightManager;
 
     @Before
     public void before(){
@@ -39,6 +40,7 @@ public class FlightTest {
         passenger4 = new Passenger("Jim", 0);
         passenger5 = new Passenger("Fraser", 1);
         passenger6 = new Passenger("Andrew", 1);
+        flightManager = new FlightManager();
     }
 
     @Test
@@ -53,12 +55,12 @@ public class FlightTest {
 
     @Test
     public void flightStartsWithZeroPassengers(){
-        assertEquals(0, flight.getBookedPassengers().size());
+        assertEquals(0, flight.numberOfBookedPassengers());
     }
 
     @Test
     public void flightHasPlane(){
-        assertEquals(PlaneType.CONCORDE, flight.getPlane().getPlaneType());
+        assertEquals(plane, flight.getPlane());
     }
 
     @Test
@@ -87,8 +89,22 @@ public class FlightTest {
     }
 
     @Test
+    public void canCheckTotalWeightAvailable(){
+        assertEquals(200, flight.totalWeightAvailable());
+    }
+
+    @Test
     public void canCheckNumberOfBookedPassengers(){
         assertEquals(0, flight.numberOfBookedPassengers());
+    }
+
+    @Test
+    public void canCheckNumberOfBagsBooked(){
+        flight.bookPassenger(passenger1);
+        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger3);
+        flight.bookPassenger(passenger4);
+        assertEquals(4, flight.numberOfBagsBooked());
     }
 
     @Test
@@ -131,6 +147,5 @@ public class FlightTest {
         flight.bookPassenger(passenger5);
         assertEquals(0, flight.numberOfAvailableSeats());
     }
-
 
 }
