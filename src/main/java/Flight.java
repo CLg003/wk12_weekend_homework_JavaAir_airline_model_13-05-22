@@ -13,6 +13,7 @@ public class Flight {
     private String destinationAirport;
     private String departureAirport;
     private LocalTime departureTime;
+    private ArrayList<Integer> availableSeatNumbers;
 
     public Flight(Pilot pilot1, Pilot pilot2, ArrayList<CabinCrew> cabinCrewMembers, Plane plane, String flightNumber, String destinationAirport, String departureAirport, String departureTime){
         this.pilot1 = pilot1;
@@ -24,6 +25,7 @@ public class Flight {
         this.destinationAirport = destinationAirport;
         this.departureAirport = departureAirport;
         this.departureTime = LocalTime.parse(departureTime);
+        this.availableSeatNumbers = new ArrayList<>();
     }
 
     public Pilot getPilot1() {
@@ -68,6 +70,25 @@ public class Flight {
         return departureTime;
     }
 
+    public ArrayList<Integer> getAvailableSeatNumbers(){
+        if ((availableSeatNumbers.size() == 0) && (numberOfAvailableSeats() != 0)){
+            setAvailableSeatNumbers();
+        }
+        return availableSeatNumbers;
+    }
+
+    public void setAvailableSeatNumbers(){
+        if ((availableSeatNumbers.size() == 0) && (numberOfAvailableSeats() != 0)){
+            for (int num = 1; num <= plane.getCapacity(); num ++) {
+                availableSeatNumbers.add(num);
+            }
+            for (Passenger passenger : bookedPassengers){
+                availableSeatNumbers.remove(Integer.valueOf(passenger.getSeatNumber()));
+            }
+//            this.availableSeatNumbers = seatNumbers;
+        }
+    }
+
     public int capacity(){
         return plane.getCapacity();
     }
@@ -93,13 +114,19 @@ public class Flight {
     }
 
     public void bookPassenger(Passenger passenger){
+        Integer seatNumber;
         if (numberOfAvailableSeats() > 0) {
+
+            ArrayList<Integer> seatNumbers = getAvailableSeatNumbers();
+            int index = (int)(Math.random() * seatNumbers.size());
+            seatNumber = seatNumbers.get(index);
             bookedPassengers.add(passenger);
             passenger.setFlight(this);
-            int seatNumber = ((int)(Math.random() * (capacity() - 1)) + 1);
-//            ((int) (Math.random()*(maximum - minimum))) + minimum
             passenger.setSeatNumber(seatNumber);
             System.out.println(seatNumber);
+
+//            passenger.setSeatNumber(seatNumbers.get(index));
+            availableSeatNumbers.remove(seatNumber);
         }
     }
 }

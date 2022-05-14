@@ -96,6 +96,18 @@ public class FlightTest {
     }
 
     @Test
+    public void hasAvailableSeatNumbersWithZeroPassengers(){
+        assertEquals(5, flight.getAvailableSeatNumbers().size());
+    }
+
+    @Test
+    public void hasAvailableSeatNumbersWithSomePassengers(){
+        flight.bookPassenger(passenger1);
+        System.out.println(flight.getAvailableSeatNumbers());
+        assertEquals(4, flight.getAvailableSeatNumbers().size());
+    }
+
+    @Test
     public void canCheckFlightCapacity(){
         assertEquals(5, flight.capacity());
     }
@@ -170,6 +182,22 @@ public class FlightTest {
     public void canAddSeatNumberToBookedPassenger(){
         flight.bookPassenger(passenger1);
         assertTrue(passenger1.getSeatNumber() > 0);
+    }
+
+    @Test
+    public void willNotDoubleBookSeatNumbers(){
+        flight.bookPassenger(passenger1);
+//        System.out.println(flight.getAvailableSeatNumbers());
+        flight.bookPassenger(passenger2);
+//        System.out.println(flight.getAvailableSeatNumbers());
+        flight.bookPassenger(passenger3);
+//        System.out.println(flight.getAvailableSeatNumbers());
+        flight.bookPassenger(passenger4);
+//        System.out.println(flight.getAvailableSeatNumbers());
+        flight.bookPassenger(passenger5);
+//        System.out.println(flight.getAvailableSeatNumbers());
+        assertEquals(0, flight.getAvailableSeatNumbers().size());
+
     }
 
 }
