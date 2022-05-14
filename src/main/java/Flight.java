@@ -96,6 +96,10 @@ public class Flight {
         if (numberOfAvailableSeats() > 0) {
             bookedPassengers.add(passenger);
             passenger.setFlight(this);
+            int seatNumber = ((int)(Math.random() * (capacity() - 1)) + 1);
+//            ((int) (Math.random()*(maximum - minimum))) + minimum
+            passenger.setSeatNumber(seatNumber);
+            System.out.println(seatNumber);
         }
     }
 }

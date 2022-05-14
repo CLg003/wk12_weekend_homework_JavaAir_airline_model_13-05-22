@@ -27,4 +27,9 @@ public class PassengerTest {
         assertEquals(null, passenger.getFlight());
     }
 
+    @Test
+    public void passengerHasSeatNumber(){
+        assertEquals(null, passenger.getSeatNumber());
+    }
+
 }

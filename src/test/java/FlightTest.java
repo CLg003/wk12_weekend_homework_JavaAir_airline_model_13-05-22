@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FlightTest {
 
@@ -163,6 +164,12 @@ public class FlightTest {
     public void canAddFlightToBookedPassenger(){
         flight.bookPassenger(passenger1);
         assertEquals(flight, passenger1.getFlight());
+    }
+
+    @Test
+    public void canAddSeatNumberToBookedPassenger(){
+        flight.bookPassenger(passenger1);
+        assertTrue(passenger1.getSeatNumber() > 0);
     }
 
 }
