@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -90,7 +91,7 @@ public class FlightTest {
 
     @Test
     public void flightHasDepartureTime(){
-        assertEquals("11:05", flight.getDepartureTime());
+        assertEquals(LocalTime.parse("11:05"), flight.getDepartureTime());
     }
 
     @Test
@@ -156,6 +157,12 @@ public class FlightTest {
         flight.bookPassenger(passenger4);
         flight.bookPassenger(passenger5);
         assertEquals(0, flight.numberOfAvailableSeats());
+    }
+
+    @Test
+    public void canAddFlightToBookedPassenger(){
+        flight.bookPassenger(passenger1);
+        assertEquals(flight, passenger1.getFlight());
     }
 
 }
