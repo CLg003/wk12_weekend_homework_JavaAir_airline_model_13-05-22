@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,7 +12,7 @@ public class Flight {
     private String flightNumber;
     private String destinationAirport;
     private String departureAirport;
-    private String departureTime;
+    private LocalTime departureTime;
 
     public Flight(Pilot pilot1, Pilot pilot2, ArrayList<CabinCrew> cabinCrewMembers, Plane plane, String flightNumber, String destinationAirport, String departureAirport, String departureTime){
         this.pilot1 = pilot1;
@@ -22,7 +23,7 @@ public class Flight {
         this.flightNumber = flightNumber;
         this.destinationAirport = destinationAirport;
         this.departureAirport = departureAirport;
-        this.departureTime = departureTime;
+        this.departureTime = LocalTime.parse(departureTime);
     }
 
     public Pilot getPilot1() {
@@ -35,7 +36,7 @@ public class Flight {
 
     public ArrayList<Pilot> getPilots(){
         ArrayList<Pilot> pilots = new ArrayList<>();
-        Collections.addAll(pilots,pilot1, pilot2);
+        Collections.addAll(pilots, pilot1, pilot2);
         return pilots;
     }
 
@@ -63,7 +64,7 @@ public class Flight {
         return departureAirport;
     }
 
-    public String getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 

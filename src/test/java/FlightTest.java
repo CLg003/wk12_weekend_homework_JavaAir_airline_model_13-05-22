@@ -44,6 +44,16 @@ public class FlightTest {
     }
 
     @Test
+    public void flightHasPilot1(){
+        assertEquals(pilot1, flight.getPilot1());
+    }
+
+    @Test
+    public void flightHasPilot2(){
+        assertEquals(pilot2, flight.getPilot2());
+    }
+
+    @Test
     public void flightHasTwoPilots(){
         assertEquals(2, flight.getPilots().size());
     }
@@ -55,7 +65,7 @@ public class FlightTest {
 
     @Test
     public void flightStartsWithZeroPassengers(){
-        assertEquals(0, flight.numberOfBookedPassengers());
+        assertEquals(0, flight.getBookedPassengers().size());
     }
 
     @Test

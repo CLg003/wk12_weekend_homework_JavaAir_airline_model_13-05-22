@@ -31,7 +31,7 @@ public class FlightManagerTest{
         cabinCrew3 = new CabinCrew("Sarah", FlightCrewRank.FLIGHT_ATTENDANT);
         cabinCrewMembers = new ArrayList<>(Arrays.asList(cabinCrew1, cabinCrew2, cabinCrew3));
         plane = new Plane(PlaneType.CONCORDE);
-        flight = new Flight(pilot1, pilot2, cabinCrewMembers, plane, "CON1132", "JFK", "EDI", "11:05");
+        flight = new Flight(pilot1, pilot2, cabinCrewMembers, plane, "CON1132", "JFK", "EDI","11:05");
         passenger1 = new Passenger("Gordon", 0);
         passenger2 = new Passenger("Ethan", 3);
         passenger3 = new Passenger("David", 1);
